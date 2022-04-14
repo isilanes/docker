@@ -1,0 +1,3 @@
+TAG=test
+
+docker build -t isilanes/$TAG -f Dockerfile.$TAG . 
