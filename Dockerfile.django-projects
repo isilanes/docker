@@ -13,7 +13,7 @@ MAINTAINER Iñaki Silanes
 #ENV DOCKYARD_SRC=.
 
 # Directory in container for all project files:
-#ENV DOCKYARD_SRVHOME=/srv
+ENV DOCKYARD_SRC_HOME=/src
 
 # Directory in container for project source files:
 #ENV DOCKYARD_SRVPROJ=/srv/DjangoProgress
@@ -50,6 +50,6 @@ RUN pip3 install pip --upgrade
 EXPOSE 8000
 
 # Copy entrypoint script into the image:
-#WORKDIR $DOCKYARD_SRVPROJ
-#COPY ./docker/entrypoint.sh /
-#ENTRYPOINT ["/entrypoint.sh"]
+WORKDIR $DOCKYARD_SRC_HOME
+COPY ./entrypoint.sh /
+ENTRYPOINT ["/entrypoint.sh"]

@@ -1,5 +1,9 @@
 #!/bin/bash
 
+ls /src
+tail -f /var/log/*
+exit
+
 python3 manage.py collectstatic --noinput  # Collect static files
 
 # Prepare log files and start outputting logs to stdout:

@@ -1,8 +1,9 @@
-TAG=$1
+PROJECT=$1
+TAG=master
 
-if [[ "x$TAG" == "x" ]]; then
-  echo "No TAG given!"
+if [[ "x$PROJECT" == "x" ]]; then
+  echo "No project given!"
   exit
 fi
 
-docker build -t isilanes/$TAG -f Dockerfile.$TAG . 
+docker build -t isilanes/$PROJECT:$TAG -f Dockerfile.$PROJECT . 

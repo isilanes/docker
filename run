@@ -1,12 +1,14 @@
-# Get local db:
-LOCALDB=$1
-if [[ "x$LOCALDB" == "x" ]]; then
-    echo No local db given!
+PROJECT=$1
+BASE=$PWD
+CODE_DIR=$BASE/webs/$PROJECT
+
+if [[ "x$PROJECT" == "x" ]]; then
+    echo No local project given!
     exit
 fi
 
-if [[ ! -f $LOCALDB ]]; then
-    echo Local db $LOCALDB does not exist!
+if [[ ! -d $CODE_DIR ]]; then
+    echo Local dir $CODE_DIR does not exist!
     exit
 fi
 
@@ -14,4 +16,4 @@ fi
 TAG=$(git branch --color=never | awk '/\*/{print $2}')
 
 # Do run:
-docker run -v $LOCALDB:/srv/DjangoProgress/progress.db:rw --publish=8081:8000 isilanes/django-progress:$TAG
+docker run -v $CODE_DIR:/src:rw --publish=8081:8000 isilanes/$PROJECT:$TAG
