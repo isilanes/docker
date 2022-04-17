@@ -1,3 +1,8 @@
-TAG=test
+TAG=$1
+
+if [[ "x$TAG" == "x" ]]; then
+  echo "No TAG given!"
+  exit
+fi
 
 docker build -t isilanes/$TAG -f Dockerfile.$TAG . 
