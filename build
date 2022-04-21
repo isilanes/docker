@@ -6,4 +6,6 @@ if [[ "x$PROJECT" == "x" ]]; then
   exit
 fi
 
+cp ~/.$PROJECT.json .
 docker build -t isilanes/$PROJECT:$TAG -f Dockerfile.$PROJECT . 
+rm -f .$PROJECT.json

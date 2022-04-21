@@ -46,8 +46,8 @@ RUN apt install -y libfreetype6-dev
 RUN apt install -y wget
 RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 RUN bash Miniconda3-latest-Linux-x86_64.sh -b
-RUN . $HOME/miniconda3/etc/profile.d/conda.sh
-#RUN conda env create -f environment.yml
+RUN . $HOME/miniconda3/etc/profile.d/conda.sh && conda env create -f environment.yml
+COPY .emporium.json /root/
 
 # Port to expose:
 EXPOSE 8000
