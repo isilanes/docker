@@ -8,5 +8,5 @@ fi
 # Get ID:
 PID=$(docker ps | grep $PROJECT | awk '{print $1}')
 
-# Attach to ID:
-docker exec -i -t $PID /bin/bash
+# Kill ID:
+docker kill $PID
