@@ -54,5 +54,5 @@ EXPOSE 8000
 
 # Copy entrypoint script into the image:
 WORKDIR $DOCKYARD_SRC_HOME
-COPY ./entrypoint.emporium /
-ENTRYPOINT ["/entrypoint.emporium"]
+COPY ./conf/emporium/entrypoint /
+ENTRYPOINT ["/entrypoint"]

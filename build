@@ -7,5 +7,5 @@ if [[ "x$PROJECT" == "x" ]]; then
 fi
 
 cp ~/.$PROJECT.json .
-docker build -t isilanes/$PROJECT:$TAG -f Dockerfile.$PROJECT . 
+docker build -t isilanes/$PROJECT:$TAG -f conf/$PROJECT/Dockerfile . 
 rm -f .$PROJECT.json

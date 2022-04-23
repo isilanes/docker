@@ -3,5 +3,4 @@
 . $HOME/miniconda3/etc/profile.d/conda.sh
 conda activate emporium
 python manage.py collectstatic --noinput  # Collect static files
-tail -f /var/log/faillog
-#python3 manage.py runserver
+python manage.py runserver 0.0.0.0:8000
