@@ -15,5 +15,8 @@ fi
 # Get version:
 TAG=$(git branch --color=never | awk '/\*/{print $2}')
 
+# Get port to bind:
+PORT=$(jq -r .$PROJECT.port conf/main.conf)
+
 # Do run:
-docker run -v $CODE_DIR:/src:rw --publish=8081:8000 isilanes/$PROJECT:$TAG
+docker run -v $CODE_DIR:/src:rw --publish=$PORT:$PORT isilanes/$PROJECT:$TAG

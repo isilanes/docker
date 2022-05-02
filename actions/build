@@ -6,6 +6,7 @@ if [[ "x$PROJECT" == "x" ]]; then
   exit
 fi
 
-cp ~/.$PROJECT.json .
-docker build -t isilanes/$PROJECT:$TAG -f conf/$PROJECT/Dockerfile . 
-rm -f .$PROJECT.json
+# Get port to bind:
+PORT=$(jq -r .$PROJECT.port conf/main.conf)
+
+docker build --build-arg EXPOSED_PORT=$PORT -t isilanes/$PROJECT:$TAG -f conf/$PROJECT/Dockerfile .

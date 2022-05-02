@@ -30,29 +30,27 @@ RUN git config --global user.name "isilanes"
 # Other packages:
 RUN apt install -y vim
 
-# Create application subdirectories:
-#WORKDIR $DOCKYARD_SRVHOME
-#RUN mkdir media static logs
-#VOLUME ["$DOCKYARD_SRVHOME/media/", "$DOCKYARD_SRVHOME/logs/"]
-
 # Copy application source code to SRCDIR:
 COPY webs/emporium/environment.yml $DOCKYARD_PROJ/
 
 # Install Python/Conda stuff:
 WORKDIR $DOCKYARD_PROJ
-RUN apt install -y pkg-config
-RUN apt install -y libpng-dev
-RUN apt install -y libfreetype6-dev
-RUN apt install -y wget
+RUN apt install -y pkg-config       \
+                   libpng-dev       \
+                   libfreetype6-dev \
+                   wget
 RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 RUN bash Miniconda3-latest-Linux-x86_64.sh -b
 RUN . $HOME/miniconda3/etc/profile.d/conda.sh && conda env create -f environment.yml
-COPY .emporium.json /root/
 
-# Port to expose:
-EXPOSE 8000
+# Copy web configuration/db:
+COPY conf/emporium/emporium.json /root/.emporium.json
+
+# This port will be used within entrypoint script:
+ARG EXPOSED_PORT
+ENV WEB_PORT=$EXPOSED_PORT
 
 # Copy entrypoint script into the image:
 WORKDIR $DOCKYARD_SRC_HOME
-COPY ./conf/emporium/entrypoint /
+COPY conf/emporium/entrypoint /
 ENTRYPOINT ["/entrypoint"]
